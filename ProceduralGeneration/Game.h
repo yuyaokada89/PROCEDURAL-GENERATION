@@ -6,6 +6,15 @@
 
 #include "StepTimer.h"
 
+#include <memory>
+#include <vector>
+
+#include "DebugCamera.h"
+#include "Camera.h"
+#include "FollowCamera.h"
+#include "Obj3d.h"
+#include "RandomMapMaker.h"
+
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -62,4 +71,25 @@ private:
 
     // Rendering loop timer.
     DX::StepTimer                                   m_timer;
+
+
+
+	//　ワールド行列
+	DirectX::SimpleMath::Matrix m_world;
+	DirectX::SimpleMath::Matrix m_view;
+	DirectX::SimpleMath::Matrix m_proj;
+
+	//　デバッグカメラ
+	std::unique_ptr<DebugCamera> m_debugcamera;
+
+	//　カメラ
+	std::unique_ptr<FollowCamera> m_camera;
+
+	//　キーボード
+	std::unique_ptr<DirectX::Keyboard> m_key;
+
+	//　テスト
+	Obj3d m_Obj;
+
+	std::unique_ptr<RandomMapMaker> m_map;
 };

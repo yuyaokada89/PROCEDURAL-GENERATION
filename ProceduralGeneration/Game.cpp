@@ -8,6 +8,7 @@
 extern void ExitGame();
 
 using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 using Microsoft::WRL::ComPtr;
 
@@ -36,6 +37,35 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+
+	//　キーボード作成
+	m_key = std::make_unique<Keyboard>();
+
+	//　デバッグカメラの生成
+	m_debugcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
+
+	//　カメラの生成
+	m_camera = std::make_unique<FollowCamera>(m_outputWidth, m_outputHeight);
+	m_camera->SetKeyboard(m_key.get());
+
+	// ビュー行列の設定
+	m_view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
+		Vector3::Zero, Vector3::UnitY);
+	//　射影行列の設定
+	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
+		float(m_outputWidth) / float(m_outputHeight), 0.1f, 1000.f);
+
+	//　3Dオブジェクトクラスの静的メンバを初期化
+	Obj3d::InitializeStatic(
+		m_camera.get()
+		, m_d3dDevice
+		, m_d3dContext
+	);
+
+	m_Obj.LoadModel(L"cmo/Sand.cmo");
+
+	
+	m_map = std::make_unique<RandomMapMaker>();
 }
 
 // Executes the basic game loop.
@@ -56,6 +86,35 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
     elapsedTime;
+
+	//　デバッグカメラの更新
+	m_debugcamera->Update();
+
+	//　カメラの更新
+	m_camera->Update();
+	m_view = m_camera->GetViewMatrix();
+	m_proj = m_camera->GetProjectionMatrix();
+
+	////　キーボードの更新
+	Keyboard::State keystate = m_key->GetState();
+
+	if (keystate.IsKeyDown(Keyboard::Keys::Up))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = Vector3::Zero;
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(0, 0.1f, 0);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
+
+	
+
+	m_Obj.Update();
 }
 
 // Draws the scene.
@@ -70,6 +129,10 @@ void Game::Render()
     Clear();
 
     // TODO: Add your rendering code here.
+
+	m_Obj.Draw();
+
+	m_map->Draw();
 
     Present();
 }

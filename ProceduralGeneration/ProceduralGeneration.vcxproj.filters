@@ -5,16 +5,70 @@
       <UniqueIdentifier>8d4988fd-e465-4f29-9ded-1d7747c9c334</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{ea5791f9-bd8a-4cea-9ff2-7f2de55b05dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{e9af9af7-d169-4404-9398-5fc4402422d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework Header">
+      <UniqueIdentifier>{74b905bb-23df-4795-8f59-72a115d27dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework Source">
+      <UniqueIdentifier>{7a0fd02d-6e76-4c99-8164-985d47a6c3da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj3d.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StepTimer.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCamera.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMapMaker.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj3d.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCamera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMapMaker.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
