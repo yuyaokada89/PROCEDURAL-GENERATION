@@ -160,6 +160,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Obj3d.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PerlinNoise.hpp" />
     <ClInclude Include="RandomMapMaker.h" />
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>

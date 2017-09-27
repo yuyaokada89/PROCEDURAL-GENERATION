@@ -15,13 +15,12 @@ RandomMapMaker::RandomMapMaker()
 	seedX = 0;
 	seedZ = 0;
 
-	width = 35;
-	depth = 35;
+	width = 40;
+	depth = 40;
 
-	MaxHeight = 5;
+	MaxHeight = 10;
 
-	seedX = rand() * 100.0f;
-	seedZ = rand() * 100.0f;
+	relief = 15.0f;
 
 	m_cube.resize(width * depth);
 
@@ -35,6 +34,9 @@ RandomMapMaker::RandomMapMaker()
 //―――――――――――――――――――――――
 void RandomMapMaker::Initialize()
 {
+	seedX = rand() % 100;
+	seedZ = rand() % 100;
+
 	//　キューブ生成
 	for (int i = 0; i < width*depth; i++)
 	{
@@ -44,22 +46,23 @@ void RandomMapMaker::Initialize()
 		m_cube[i].SetTranslation(pos);
 		MakeY(i);
 
-		if (m_cube[i].GetTranslation().y >= 3)
+		if (m_cube[i].GetTranslation().y >= 2)
 		{
 			m_cube[i].LoadModel(L"cmo/Grassy.cmo");
 		}
-		else if (m_cube[i].GetTranslation().y == 2)
+		else if (m_cube[i].GetTranslation().y >= 0)
 		{
 			m_cube[i].LoadModel(L"cmo/Sand.cmo");
 		}
-		else if (m_cube[i].GetTranslation().y == 1)
+		else if (m_cube[i].GetTranslation().y >= -3)
 		{
 			m_cube[i].LoadModel(L"cmo/Water.cmo");
 		}
-		else if (m_cube[i].GetTranslation().y == 0)
+		else if (m_cube[i].GetTranslation().y >= -5)
 		{
 			m_cube[i].LoadModel(L"cmo/Stone.cmo");
 		}
+		
 	}
 }
 
@@ -92,7 +95,18 @@ void RandomMapMaker::Calc()
 //
 void RandomMapMaker::MakeY(int number)
 {
-	int y = rand() % MaxHeight;
+	//RandomHeighit = rand() % MaxHeight;
+	//Vector3 localPos = Vector3(m_cube[number].GetTranslation().x, y, m_cube[number].GetTranslation().z);*/
+	//m_cube[number].SetTranslation(localPos);
+
+	
+
+	float xSample = (m_cube[number].GetTranslation().x + seedX) / relief;
+	float zSample = (m_cube[number].GetTranslation().z + seedZ) / relief;
+
+	float noise = m_noise.noise(xSample, zSample);
+
+	y = MaxHeight * noise;
 	Vector3 localPos = Vector3(m_cube[number].GetTranslation().x, y, m_cube[number].GetTranslation().z);
 	m_cube[number].SetTranslation(localPos);
 }

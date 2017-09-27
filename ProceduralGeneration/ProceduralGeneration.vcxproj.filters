@@ -43,6 +43,7 @@
     <ClInclude Include="RandomMapMaker.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugCamera.cpp">

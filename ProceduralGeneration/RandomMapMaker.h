@@ -1,5 +1,5 @@
 #include "Obj3d.h"
-
+#include "PerlinNoise.hpp"
 
 #include <vector>
 
@@ -21,11 +21,17 @@ private:
 	//　高さの最大値
 	int MaxHeight;
 
+	int RandomHeighit;
+
+	int y;
+
 	//　起伏の激しさ
-	float relif;
+	float relief;
 
 	// 箱モデル
 	std::vector<Obj3d>	m_cube;
+
+	siv::PerlinNoise m_noise;
 
 public:
 	//　初期化
