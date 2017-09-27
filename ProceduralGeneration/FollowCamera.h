@@ -28,6 +28,9 @@ class FollowCamera :public Camera
 		//	キーボードセット
 		void SetKeyboard(DirectX::Keyboard *keyboard);
 
+		//　平行移動を取得
+		const DirectX::SimpleMath::Vector3& GetTranslation() { return m_targetPos; }
+
 	protected:
 		//　追従対象の座標
 		DirectX::SimpleMath::Vector3 m_targetPos;

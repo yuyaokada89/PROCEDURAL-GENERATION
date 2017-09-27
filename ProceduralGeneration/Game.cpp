@@ -98,10 +98,11 @@ void Game::Update(DX::StepTimer const& timer)
 	////　キーボードの更新
 	Keyboard::State keystate = m_key->GetState();
 
+	//　カメラ上昇
 	if (keystate.IsKeyDown(Keyboard::Keys::Up))
 	{
 		// 現在の座標・回転角を取得
-		Vector3 trans = Vector3::Zero;
+		Vector3 trans = m_camera->GetTranslation();
 		// 移動ベクトル(Z座標後退)
 		Vector3 moveV(0, 0.1f, 0);
 		Matrix rotm = Matrix::CreateRotationY(0);
@@ -112,9 +113,82 @@ void Game::Update(DX::StepTimer const& timer)
 		m_camera->SetTargetPos(trans);
 	}
 
+	// カメラ下降
+	if (keystate.IsKeyDown(Keyboard::Keys::Down))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = m_camera->GetTranslation();
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(0, -0.1f, 0);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
 	
+	//　カメラ右移動
+	if (keystate.IsKeyDown(Keyboard::Keys::Right))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = m_camera->GetTranslation();
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(0.1f,0, 0);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
 
-	m_Obj.Update();
+	//　カメラ左移動
+	if (keystate.IsKeyDown(Keyboard::Keys::Left))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = m_camera->GetTranslation();
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(-0.1f, 0, 0);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
+
+	//　カメラ前進
+	if (keystate.IsKeyDown(Keyboard::Keys::W))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = m_camera->GetTranslation();
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(0, 0, -0.1f);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
+
+	//　カメラ後退
+	if (keystate.IsKeyDown(Keyboard::Keys::S))
+	{
+		// 現在の座標・回転角を取得
+		Vector3 trans = m_camera->GetTranslation();
+		// 移動ベクトル(Z座標後退)
+		Vector3 moveV(0, 0, 0.1f);
+		Matrix rotm = Matrix::CreateRotationY(0);
+		// 移動ベクトルを回転する
+		moveV = Vector3::TransformNormal(moveV, rotm);
+		// 移動
+		trans += moveV;
+		m_camera->SetTargetPos(trans);
+	}
+
+	m_map->Update();
 }
 
 // Draws the scene.
@@ -130,7 +204,6 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 
-	m_Obj.Draw();
 
 	m_map->Draw();
 

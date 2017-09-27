@@ -91,5 +91,6 @@ private:
 	//　テスト
 	Obj3d m_Obj;
 
+	// マップ
 	std::unique_ptr<RandomMapMaker> m_map;
 };
