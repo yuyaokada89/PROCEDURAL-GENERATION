@@ -44,6 +44,8 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.hpp" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="DXTKGroup.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugCamera.cpp">
@@ -70,6 +72,7 @@
     <ClCompile Include="RandomMapMaker.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="DXTKGroup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

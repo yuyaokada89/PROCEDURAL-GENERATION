@@ -4,6 +4,8 @@
 
 #include "pch.h"
 #include "Game.h"
+#include "DXTKGroup.h"
+
 
 extern void ExitGame();
 
@@ -38,15 +40,11 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
 
-	//　キーボード作成
-	m_key = std::make_unique<Keyboard>();
-
 	//　デバッグカメラの生成
 	m_debugcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
 
 	//　カメラの生成
 	m_camera = std::make_unique<FollowCamera>(m_outputWidth, m_outputHeight);
-	m_camera->SetKeyboard(m_key.get());
 
 	// ビュー行列の設定
 	m_view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
@@ -55,11 +53,17 @@ void Game::Initialize(HWND window, int width, int height)
 	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
 		float(m_outputWidth) / float(m_outputHeight), 0.1f, 1000.f);
 
+
+	// DirectXTKの管理オブジェクトの初期化
+	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
+
+	dxtk.Initializer(m_d3dDevice.Get(), m_d3dContext.Get());
+
 	//　3Dオブジェクトクラスの静的メンバを初期化
 	Obj3d::InitializeStatic(
 		m_camera.get()
-		, m_d3dDevice
-		, m_d3dContext
+		, dxtk.m_device
+		, dxtk.m_context
 	);
 
 	m_Obj.LoadModel(L"cmo/Sand.cmo");
@@ -95,11 +99,14 @@ void Game::Update(DX::StepTimer const& timer)
 	m_view = m_camera->GetViewMatrix();
 	m_proj = m_camera->GetProjectionMatrix();
 
-	////　キーボードの更新
-	Keyboard::State keystate = m_key->GetState();
+
+	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
+	auto kb = dxtk.m_keyboard->GetState();
+	// キー入力の更新
+	dxtk.UpdateInputState();
 
 	//　カメラ上昇
-	if (keystate.IsKeyDown(Keyboard::Keys::Up))
+	if (kb.IsKeyDown(Keyboard::Keys::Up))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();
@@ -114,7 +121,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	// カメラ下降
-	if (keystate.IsKeyDown(Keyboard::Keys::Down))
+	if (kb.IsKeyDown(Keyboard::Keys::Down))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();
@@ -129,7 +136,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 	
 	//　カメラ右移動
-	if (keystate.IsKeyDown(Keyboard::Keys::Right))
+	if (kb.IsKeyDown(Keyboard::Keys::Right))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();
@@ -144,7 +151,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	//　カメラ左移動
-	if (keystate.IsKeyDown(Keyboard::Keys::Left))
+	if (kb.IsKeyDown(Keyboard::Keys::Left))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();
@@ -159,7 +166,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	//　カメラ前進
-	if (keystate.IsKeyDown(Keyboard::Keys::W))
+	if (kb.IsKeyDown(Keyboard::Keys::W))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();
@@ -174,7 +181,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	//　カメラ後退
-	if (keystate.IsKeyDown(Keyboard::Keys::S))
+	if (kb.IsKeyDown(Keyboard::Keys::S))
 	{
 		// 現在の座標・回転角を取得
 		Vector3 trans = m_camera->GetTranslation();

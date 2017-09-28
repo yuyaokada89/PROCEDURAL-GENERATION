@@ -85,9 +85,6 @@ private:
 	//　カメラ
 	std::unique_ptr<FollowCamera> m_camera;
 
-	//　キーボード
-	std::unique_ptr<DirectX::Keyboard> m_key;
-
 	//　テスト
 	Obj3d m_Obj;
 

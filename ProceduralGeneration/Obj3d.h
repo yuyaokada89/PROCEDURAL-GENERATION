@@ -29,10 +29,6 @@ class Obj3d
 		static Camera*											m_pCamera;
 		//　汎用ステート
 		static std::unique_ptr<DirectX::CommonStates>			m_states;
-		//　デバイス
-		static Microsoft::WRL::ComPtr<ID3D11Device>				m_d3dDevice;
-		//　コンテキスト
-		static Microsoft::WRL::ComPtr<ID3D11DeviceContext>		m_d3dContext;
 		//　エフェクトファクトリ
 		static std::unique_ptr<DirectX::EffectFactory>			m_factory;
 

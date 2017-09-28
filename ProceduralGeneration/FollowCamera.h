@@ -25,9 +25,6 @@ class FollowCamera :public Camera
 		void Update()override;
 		//　TPSカメラの初期化
 		void InitializeTPS();
-		//	キーボードセット
-		void SetKeyboard(DirectX::Keyboard *keyboard);
-
 		//　平行移動を取得
 		const DirectX::SimpleMath::Vector3& GetTranslation() { return m_targetPos; }
 
@@ -36,9 +33,6 @@ class FollowCamera :public Camera
 		DirectX::SimpleMath::Vector3 m_targetPos;
 		//　追従対象の座標
 		float m_targetAngle;
-		// キーボード
-		DirectX::Keyboard *m_keyboard;
-		DirectX::Keyboard::KeyboardStateTracker m_keyboardTracker;
 		//　カメラフラグ
 		bool m_isFPS;
 };

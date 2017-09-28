@@ -5,6 +5,7 @@
 
 //　ヘッダファイルのインクルード
 #include "FollowCamera.h"
+#include "DXTKGroup.h"
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -17,7 +18,6 @@ FollowCamera::FollowCamera(int windowWidth, int windowHeight)
 {
 	m_targetPos = Vector3::Zero;
 	m_targetAngle = 0.0f;
-	m_keyboard = nullptr;
 	m_isFPS = false;
 	InitializeTPS();
 }
@@ -40,11 +40,11 @@ void FollowCamera::Update()
 	//　視点、参照点
 	Vector3 eyepos, refpos;
 
-	//　キーボードの取得
-	Keyboard::State keystate = m_keyboard->GetState();
-	m_keyboardTracker.Update(keystate);
 
-	if (m_keyboardTracker.IsKeyPressed(Keyboard::Keyboard::C))
+	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
+
+
+	if (dxtk.m_keyTracker->IsKeyPressed(Keyboard::Keyboard::C))
 	{
 		// フラグを切り替える
 		m_isFPS = !m_isFPS;
@@ -96,11 +96,6 @@ void FollowCamera::Update()
 	SetRefPos(refpos);
 	//　カメラの更新
 	Camera::Update();
-}
-
-void FollowCamera::SetKeyboard(DirectX::Keyboard *keyboard)
-{
-	m_keyboard = keyboard;
 }
 
 void FollowCamera::InitializeTPS()

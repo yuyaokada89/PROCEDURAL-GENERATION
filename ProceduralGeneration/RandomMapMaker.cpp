@@ -15,8 +15,8 @@ RandomMapMaker::RandomMapMaker()
 	seedX = 0;
 	seedZ = 0;
 
-	width = 40;
-	depth = 40;
+	width = 30;
+	depth = 30;
 
 	MaxHeight = 10;
 

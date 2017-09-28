@@ -3,7 +3,6 @@
 #include "Singleton.h"
 
 #include <Keyboard.h>
-#include <Mouse.h>
 #include <SpriteFont.h>
 #include <CommonStates.h>
 
@@ -25,10 +24,6 @@ namespace DXTK
 		/*キーボード関係*/
 		std::unique_ptr<DirectX::Keyboard> m_keyboard;
 		std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker> m_keyTracker;
-
-		/*マウス関係*/
-		std::unique_ptr<DirectX::Mouse> m_mouse;
-		std::unique_ptr<DirectX::Mouse::ButtonStateTracker> m_mouseTracker;
 
 		/*コモンステート*/
 		std::unique_ptr<DirectX::CommonStates> m_state;
