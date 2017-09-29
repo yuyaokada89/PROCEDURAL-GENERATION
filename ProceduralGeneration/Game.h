@@ -8,12 +8,17 @@
 
 #include <memory>
 #include <vector>
+#include <VertexTypes.h>
+#include <PrimitiveBatch.h>
+
 
 #include "DebugCamera.h"
 #include "Camera.h"
 #include "FollowCamera.h"
 #include "Obj3d.h"
 #include "RandomMapMaker.h"
+
+
 
 
 // A basic game implementation that creates a D3D11 device and
@@ -39,6 +44,10 @@ public:
 
     // Properties
     void GetDefaultSize( int& width, int& height ) const;
+
+	void PolygonInit();
+
+	void PolygonDraw();
 
 private:
 
@@ -85,9 +94,19 @@ private:
 	//　カメラ
 	std::unique_ptr<FollowCamera> m_camera;
 
-	//　テスト
-	Obj3d m_Obj;
-
 	// マップ
 	std::unique_ptr<RandomMapMaker> m_map;
+
+	//プリミティブを表示するために使う
+	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionNormalColor>>primitiveBatch;
+
+	//エフェクト（シェーダー関係をまとめたクラス）
+	std::unique_ptr<DirectX::BasicEffect>basicEffect;
+
+
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
+
+
+	float m_angle;
+
 };

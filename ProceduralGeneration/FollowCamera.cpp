@@ -79,7 +79,7 @@ void FollowCamera::Update()
 
 
 		//　カメラの視線方向の逆方向に回転
-		Matrix rotCamera = Matrix::CreateRotationY(m_targetAngle);
+		Matrix rotCamera = Matrix::CreateRotationX(m_targetAngle);
 		cameraV = Vector3::TransformNormal(cameraV, rotCamera);
 
 		//　カメラ座標を計算
