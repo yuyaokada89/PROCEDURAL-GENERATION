@@ -15,6 +15,7 @@
 #include "FollowCamera.h"
 #include "Obj3d.h"
 #include "RandomMapMaker.h"
+#include "VertexCube.h"
 
 
 

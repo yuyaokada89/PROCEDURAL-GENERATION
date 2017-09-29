@@ -46,6 +46,9 @@
     <ClInclude Include="PerlinNoise.hpp" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="DXTKGroup.h" />
+    <ClInclude Include="VertexCube.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugCamera.cpp">
@@ -73,6 +76,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="DXTKGroup.cpp" />
+    <ClCompile Include="VertexCube.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

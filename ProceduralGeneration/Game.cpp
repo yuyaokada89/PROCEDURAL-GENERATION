@@ -73,7 +73,7 @@ void Game::Initialize(HWND window, int width, int height)
 		, dxtk.m_context
 	);
 
-	RandomMapMaker::InitializeStatic(m_camera.get());
+	VertexCube::InitializeStatic(m_camera.get());
 
 	m_angle = 0;
 
