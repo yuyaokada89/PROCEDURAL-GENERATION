@@ -8,8 +8,6 @@
 
 #include <memory>
 #include <vector>
-#include <VertexTypes.h>
-#include <PrimitiveBatch.h>
 
 
 #include "DebugCamera.h"
@@ -44,10 +42,6 @@ public:
 
     // Properties
     void GetDefaultSize( int& width, int& height ) const;
-
-	void PolygonInit();
-
-	void PolygonDraw();
 
 private:
 
@@ -96,16 +90,6 @@ private:
 
 	// マップ
 	std::unique_ptr<RandomMapMaker> m_map;
-
-	//プリミティブを表示するために使う
-	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionNormalColor>>primitiveBatch;
-
-	//エフェクト（シェーダー関係をまとめたクラス）
-	std::unique_ptr<DirectX::BasicEffect>basicEffect;
-
-
-	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
-
 
 	float m_angle;
 

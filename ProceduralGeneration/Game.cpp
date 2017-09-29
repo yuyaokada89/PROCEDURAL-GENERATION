@@ -16,60 +16,6 @@ using namespace Microsoft::WRL;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-using Microsoft::WRL::ComPtr;
-using VT = VertexPositionNormalColor;		//入力レイアウトが位置、色
-using PB = PrimitiveBatch<VT>;
-
-
-// 立方体の頂点データ
-VertexPositionNormalColor vertexes_n[] =
-{
-	// 正面
-	{  Vector3(-0.5f, 0.5f, 0.5f),  Vector3(0.0f, 0.0f, 1.0f)  ,Colors::Red  },
- 	{  Vector3(0.5f, 0.5f, 0.5f),   Vector3(0.0f, 0.0f, 1.0f)  ,Colors::Red  },
-	{  Vector3(-0.5f, -0.5f, 0.5f), Vector3(0.0f, 0.0f, 1.0f)  ,Colors::Red  },
-	{  Vector3(0.5f, -0.5f, 0.5f),  Vector3(0.0f, 0.0f, 1.0f)  ,Colors::Red  },
-															  			    
-	// 後面													  			    
-	{ Vector3(-0.5f, 0.5f, -0.5f),  Vector3(0.0f, 0.0f, -1.0f) ,Colors::Red  },
-	{ Vector3(0.5f, 0.5f, -0.5f),   Vector3(0.0f, 0.0f, -1.0f) ,Colors::Red  },
-	{ Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.0f, 0.0f, -1.0f) ,Colors::Red  },
-	{ Vector3(0.5f, -0.5f, -0.5f),  Vector3(0.0f, 0.0f, -1.0f) ,Colors::Red  },
-															  			    
-	// 上面													  			    
-	{ Vector3(-0.5f, 0.5f, -0.5f),  Vector3(0.0f, 1.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(0.5f, 0.5f, -0.5f),   Vector3(0.0f, 1.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(-0.5f, 0.5f, 0.5f),   Vector3(0.0f, 1.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(0.5f, 0.5f, 0.5f),    Vector3(0.0f, 1.0f, 0.0f)  ,Colors::Red  },
-															 			    
-	// 下面													 			    
-	{ Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.0f, -1.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(0.5f, -0.5f, -0.5f),  Vector3(0.0f, -1.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(-0.5f, -0.5f, 0.5f),  Vector3(0.0f, -1.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(0.5f, -0.5f, 0.5f),   Vector3(0.0f, -1.0f, 0.0f) ,Colors::Red  },
-															  			    
-	// 右面													  			    
-	{ Vector3(0.5f, 0.5f, 0.5f),    Vector3(1.0f, 0.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(0.5f, 0.5f, -0.5f),   Vector3(1.0f, 0.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(0.5f, -0.5f, 0.5f),   Vector3(1.0f, 0.0f, 0.0f)  ,Colors::Red  },
-	{ Vector3(0.5f, -0.5f, -0.5f),  Vector3(1.0f, 0.0f, 0.0f)  ,Colors::Red  },
-															 
-	// 左面													 
-	{ Vector3(-0.5f, 0.5f, 0.5f),   Vector3(-1.0f, 0.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(-0.5f, 0.5f, -0.5f),  Vector3(-1.0f, 0.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(-0.5f, -0.5f, 0.5f),  Vector3(-1.0f, 0.0f, 0.0f) ,Colors::Red  },
-	{ Vector3(-0.5f, -0.5f, -0.5f), Vector3(-1.0f, 0.0f, 0.0f) ,Colors::Red  },
-};
-
-// インデックスデータ
-uint16_t indexes[] = {
-	0, 1, 2, 1, 3, 2,
-	0 + 4, 2 + 4, 1 + 4, 1 + 4, 2 + 4, 3 + 4,
-	0 + 8, 1 + 8, 2 + 8, 1 + 8, 3 + 8, 2 + 8,
-	0 + 12, 2 + 12, 1 + 12, 1 + 12, 2 + 12, 3 + 12,
-	0 + 16, 1 + 16, 2 + 16, 1 + 16, 3 + 16, 2 + 16,
-	0 + 20, 2 + 20, 1 + 20, 1 + 20, 2 + 20, 3 + 20,
-};
 
 
 
@@ -104,8 +50,6 @@ void Game::Initialize(HWND window, int width, int height)
 
 	dxtk.Initializer(m_d3dDevice.Get(), m_d3dContext.Get());
 
-	PolygonInit();
-
 	//　デバッグカメラの生成
 	m_debugcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
 
@@ -129,68 +73,14 @@ void Game::Initialize(HWND window, int width, int height)
 		, dxtk.m_context
 	);
 
+	RandomMapMaker::InitializeStatic(m_camera.get());
+
 	m_angle = 0;
 
-	m_map = std::make_unique<RandomMapMaker>();
-
-	
-	
+	m_map = std::make_unique<RandomMapMaker>();	
 
 }
 
-void Game::PolygonInit()
-{
-	// DirectXTKの管理オブジェクトの初期化
-	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
-
-	//プリミティブバッチを作成
-	primitiveBatch = std::make_unique<PB>(dxtk.m_context);
-
-	//エフェクトを作成
-	basicEffect = std::make_unique<BasicEffect>(dxtk.m_device);
-
-	basicEffect->SetVertexColorEnabled(true);
-
-	basicEffect->SetAmbientLightColor(Vector3(0.5f, 0.5f, 1.0f));
-
-	basicEffect->SetLightDiffuseColor(0, Vector3(0.2f, 1.0f, 0.2f));
-
-	basicEffect->SetLightEnabled(0, true);
-
-	basicEffect->SetLightDiffuseColor(0, Vector3(0.2f, 1.0f, 0.2f));
-
-	basicEffect->SetLightDirection(0, Vector3(1.0f, -0.5f, 2.0f));
-
-	basicEffect->SetLightEnabled(1, true);
-
-	basicEffect->SetLightDiffuseColor(1, Vector3(0.5f, 0.2f, 0.3f));
-
-	basicEffect->SetLightDirection(1, Vector3(-1.0f, -0.5f, -2.0f));
-
-	////頂点色を使用するのをエフェクトに教える
-	//basicEffect->SetVertexColorEnabled(false);	// 頂点カラー(OFF)
-	//basicEffect->SetLightingEnabled(false);		// ライト(ON)
-	//basicEffect->SetTextureEnabled(true);		// テクスチャ(OFF)
-	//basicEffect->SetPerPixelLighting(false);	// ピクセルライティング(OFF)
-
-	//入力レイアウトを作成する
-	//今回使用する頂点シェーダーを所得する
-	void const* shaderByteCode;	// プログラムの先頭アドレス
-
-	size_t byteCodeLength;		// プログラムのサイズ
-
-	basicEffect->GetVertexShaderBytecode(
-		&shaderByteCode, &byteCodeLength);
-
-	//byteCodeLength = 4744;
-
-	dxtk.m_device->CreateInputLayout(
-		VertexPositionNormalColor::InputElements,
-		VertexPositionNormalColor::InputElementCount,
-		shaderByteCode,
-		byteCodeLength,
-		inputLayout.GetAddressOf());
-}
 
 // Executes the basic game loop.
 void Game::Tick()
@@ -315,7 +205,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_camera->SetTargetPos(trans);
 	}
 
-	const float rotSpeed = 0.3f;
+	const float rotSpeed = 0.5f;
 
 	//　カメラ後退
 	if (kb.IsKeyDown(Keyboard::Keys::Q))
@@ -330,6 +220,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_angle += rotSpeed;
 		m_camera->SetTargetAngle(XMConvertToRadians(m_angle));
 	}
+
 	m_map->Update();
 }
 
@@ -351,47 +242,11 @@ void Game::Render()
 	
 	m_map->Draw();
 
-	PolygonDraw();
-
 	//dxtk.m_spriteBatch->Begin();
 
     Present();
 }
 
-void Game::PolygonDraw()
-{
-	// DirectXTKの管理オブジェクトの初期化
-	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
-
-	// ワールド行列、ビュー行列、射影行列を設定
-	basicEffect->SetWorld(m_world);
-	basicEffect->SetView(m_view);
-	basicEffect->SetProjection(m_proj);
-	basicEffect->Apply(dxtk.m_context);
-
-	// 深度・ステンシルの設定（通常の設定）
-	dxtk.m_context->OMSetDepthStencilState(
-		dxtk.m_state->DepthDefault(), 0);
-
-	// ブレンドステートの設定（不透明）
-	dxtk.m_context->OMSetBlendState(
-		dxtk.m_state->Opaque(), nullptr, 0XFFFFFFFF);
-
-	// カリングの設定（カリングはしない）
-	dxtk.m_context->RSSetState(dxtk.m_state->CullCounterClockwise());
-
-	dxtk.m_context->IASetInputLayout(inputLayout.Get());
-
-	// プリミティブの描画
-	primitiveBatch->Begin();
-
-	// 三角形リストの描画
-	primitiveBatch->DrawIndexed(
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-		indexes, 6 * 6, vertexes_n, 4 * 6);
-
-	primitiveBatch->End();
-}
 
 // Helper method to clear the back buffers.
 void Game::Clear()
