@@ -20,8 +20,8 @@ RandomMapMaker::RandomMapMaker()
 	seedX = 0;
 	seedZ = 0;
 
-	width = 35;
-	depth = 35;
+	width = 40;
+	depth = 40;
 
 	MaxHeight = 10;
 
@@ -60,24 +60,25 @@ void RandomMapMaker::Initialize()
 		//　ワールド行列を合成
 		world = scalemat * transmat;
 
-		
+		XMVECTOR color;
 
 		if (MakeY(j / width, j % depth) >= 2)
 		{
-			m_VertexCube[j] = std::make_unique<VertexCube>(world, 0);
+			color = Colors::Green;		
 		}
 		else if (MakeY(j / width, j % depth) >= 0)
 		{
-			m_VertexCube[j] = std::make_unique<VertexCube>(world, 1);
+			color = Colors::SaddleBrown;
 		}
 		else if (MakeY(j / width, j % depth) >= -3)
 		{
-			m_VertexCube[j] = std::make_unique<VertexCube>(world, 2);
+			color = Colors::RoyalBlue;
 		}
 		else if (MakeY(j / width, j % depth) >= -6)
 		{
-			m_VertexCube[j] = std::make_unique<VertexCube>(world, 3);
+			color = Colors::Gray;
 		}
+		m_VertexCube[j] = std::make_unique<VertexCube>(world, color);
 	}
 }
 
