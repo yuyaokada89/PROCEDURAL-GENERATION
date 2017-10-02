@@ -23,54 +23,54 @@ Camera*								    VertexCube::m_pCamera;
 VertexPositionNormalColor vertexes_g[] =
 {
 	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//3
+	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//0
+	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//1
+	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//2
+	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//3
 
 	// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::LightGreen },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::LightGreen },	//5
+	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Green },	//4
+	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Green },	//5
 
 	// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightGreen },	//7
+	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//6
+	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//7
 };
 
 // 立方体の頂点データ
 VertexPositionNormalColor vertexes_st[] =
 {
 	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//3
+	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//0
+	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//1
+	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//2
+	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//3
 
-																					// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Silver },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Silver },	//5
+	// 右面													  			    
+	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Gray },	//4
+	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Gray },	//5
 
-																					// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Silver },	//7
+	// 左面													  			    
+	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//6
+	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//7
 };
 
 // 立方体の頂点データ
 VertexPositionNormalColor vertexes_w[] =
 {
 	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//3
+	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//0
+	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//1
+	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//2
+	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//3
 
-																					// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::LightSkyBlue },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::LightSkyBlue },	//5
+	// 右面													  			    
+	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::RoyalBlue },	//4
+	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::RoyalBlue },	//5
 
-																					// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::LightSkyBlue },	//7
+	// 左面													  			    
+	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//6
+	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//7
 };
 
 
@@ -78,73 +78,22 @@ VertexPositionNormalColor vertexes_w[] =
 VertexPositionNormalColor vertexes_sa[] =
 {
 	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//3
+	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//0
+	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//1
+	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//2
+	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//3
 
-																						// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Brown },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Brown },	//5
+	// 右面													  			    
+	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::SaddleBrown },	//4
+	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::SaddleBrown },	//5
 
-																					// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Brown },	//7
+	// 左面													  			    
+	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//6
+	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//7
 };
 
 //　頂点インデックス
-uint16_t indexes_g[] =
-{
-	2,1,0,	//　表
-	3,1,2,	//　表
-	4,3,2,	//　右
-	5,3,4,	//　右
-	0,7,6,	//　左
-	1,7,0,	//　左
-	6,7,4,	//　裏
-	4,7,5,	//　裏
-	4,0,6,	//　上
-	2,0,4,	//　上
-	7,1,5,	//　下
-	5,1,3,	//　下
-};
-
-//　頂点インデックス
-uint16_t indexes_sa[] =
-{
-	2,1,0,	//　表
-	3,1,2,	//　表
-	4,3,2,	//　右
-	5,3,4,	//　右
-	0,7,6,	//　左
-	1,7,0,	//　左
-	6,7,4,	//　裏
-	4,7,5,	//　裏
-	4,0,6,	//　上
-	2,0,4,	//　上
-	7,1,5,	//　下
-	5,1,3,	//　下
-};
-
-//　頂点インデックス
-uint16_t indexes_w[] =
-{
-	2,1,0,	//　表
-	3,1,2,	//　表
-	4,3,2,	//　右
-	5,3,4,	//　右
-	0,7,6,	//　左
-	1,7,0,	//　左
-	6,7,4,	//　裏
-	4,7,5,	//　裏
-	4,0,6,	//　上
-	2,0,4,	//　上
-	7,1,5,	//　下
-	5,1,3,	//　下
-};
-
-//　頂点インデックス
-uint16_t indexes_st[] =
+uint16_t indexes[] =
 {
 	2,1,0,	//　表
 	3,1,2,	//　表
@@ -274,7 +223,7 @@ void VertexCube::PolygonDraw()
 		// 三角形リストの描画
 		primitiveBatch->DrawIndexed(
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes_g, 6 * 6, vertexes_g, 4 * 6);
+			indexes, 6 * 6, vertexes_g, 4 * 6);
 		primitiveBatch->End();
 		break;
 	case 1:
@@ -283,7 +232,7 @@ void VertexCube::PolygonDraw()
 		// 三角形リストの描画
 		primitiveBatch->DrawIndexed(
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes_sa, 6 * 6, vertexes_sa, 4 * 6);
+			indexes, 6 * 6, vertexes_sa, 4 * 6);
 		primitiveBatch->End();
 		break;
 	case 2:
@@ -292,7 +241,7 @@ void VertexCube::PolygonDraw()
 		// 三角形リストの描画
 		primitiveBatch->DrawIndexed(
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes_w, 6 * 6, vertexes_w, 4 * 6);
+			indexes, 6 * 6, vertexes_w, 4 * 6);
 		primitiveBatch->End();
 		break;
 	case 3:
@@ -301,7 +250,7 @@ void VertexCube::PolygonDraw()
 		// 三角形リストの描画
 		primitiveBatch->DrawIndexed(
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes_st, 6 * 6, vertexes_st, 4 * 6);
+			indexes, 6 * 6, vertexes_st, 4 * 6);
 		primitiveBatch->End();
 		break;
 	}
