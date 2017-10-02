@@ -19,110 +19,58 @@ using PB = PrimitiveBatch<VT>;
 Camera*								    VertexCube::m_pCamera;
 
 
-// 立方体の頂点データ
-VertexPositionNormalColor vertexes_g[] =
-{
-	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//3
-
-	// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Green },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Green },	//5
-
-	// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Green },	//7
-};
-
-// 立方体の頂点データ
-VertexPositionNormalColor vertexes_st[] =
-{
-	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//3
-
-	// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Gray },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::Gray },	//5
-
-	// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::Gray },	//7
-};
-
-// 立方体の頂点データ
-VertexPositionNormalColor vertexes_w[] =
-{
-	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//3
-
-	// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::RoyalBlue },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::RoyalBlue },	//5
-
-	// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::RoyalBlue },	//7
-};
-
-
-// 立方体の頂点データ
-VertexPositionNormalColor vertexes_sa[] =
-{
-	// 正面
-	{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//0
-	{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//1
-	{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//2
-	{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//3
-
-	// 右面													  			    
-	{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::SaddleBrown },	//4
-	{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,Colors::SaddleBrown },	//5
-
-	// 左面													  			    
-	{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//6
-	{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,Colors::SaddleBrown },	//7
-};
-
-//　頂点インデックス
-uint16_t indexes[] =
-{
-	2,1,0,	//　表
-	3,1,2,	//　表
-	4,3,2,	//　右
-	5,3,4,	//　右
-	0,7,6,	//　左
-	1,7,0,	//　左
-	6,7,4,	//　裏
-	4,7,5,	//　裏
-	4,0,6,	//　上
-	2,0,4,	//　上
-	7,1,5,	//　下
-	5,1,3,	//　下
-};
-
 
 void VertexCube::InitializeStatic(Camera * pCamera)
 {
 	m_pCamera = pCamera;
 }
 
-VertexCube::VertexCube(Matrix world,int Height_num)
+VertexCube::VertexCube(Matrix world,XMVECTOR color)
 {
 	m_world = world;
-	m_height_num = Height_num;
+
+	m_color = color;
+
+	VertexColorCreate();
 
 	PolygonInit();
 }
 
+void VertexCube::VertexColorCreate()
+{
+	vex[0] =
+	{
+		Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color 	//0
+	};
+	vex[1] =
+	{
+		Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color 	//1
+	};
+	vex[2] =
+	{
+		Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//2
+	};
+	vex[3] =
+	{
+		Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//3
+	};
+	vex[4] =
+	{
+		Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//4
+	};
+	vex[5] =
+	{
+		Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//5
+	};
+	vex[6] =
+	{
+		Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//6
+	};
+	vex[7] =
+	{
+		Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//7
+	};
+}
 
 void VertexCube::PolygonInit()
 {
@@ -215,47 +163,12 @@ void VertexCube::PolygonDraw()
 
 	dxtk.m_context->IASetInputLayout(inputLayout.Get());
 
-	switch (m_height_num)
-	{
-	case 0:
-		// プリミティブの描画
-		primitiveBatch->Begin();
-		// 三角形リストの描画
-		primitiveBatch->DrawIndexed(
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes, 6 * 6, vertexes_g, 4 * 6);
-		primitiveBatch->End();
-		break;
-	case 1:
-		// プリミティブの描画
-		primitiveBatch->Begin();
-		// 三角形リストの描画
-		primitiveBatch->DrawIndexed(
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes, 6 * 6, vertexes_sa, 4 * 6);
-		primitiveBatch->End();
-		break;
-	case 2:
-		// プリミティブの描画
-		primitiveBatch->Begin();
-		// 三角形リストの描画
-		primitiveBatch->DrawIndexed(
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes, 6 * 6, vertexes_w, 4 * 6);
-		primitiveBatch->End();
-		break;
-	case 3:
-		// プリミティブの描画
-		primitiveBatch->Begin();
-		// 三角形リストの描画
-		primitiveBatch->DrawIndexed(
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			indexes, 6 * 6, vertexes_st, 4 * 6);
-		primitiveBatch->End();
-		break;
-	}
-
-	
-
+	// プリミティブの描画
+	primitiveBatch->Begin();
+	// 三角形リストの描画
+	primitiveBatch->DrawIndexed(
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		m_indexes, 6 * 6, vex, 4 * 6);
+	primitiveBatch->End();
 	
 }
