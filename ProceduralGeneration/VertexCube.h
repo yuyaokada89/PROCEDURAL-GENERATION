@@ -30,9 +30,13 @@ private:
 	//インプットレイアウト
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
 
+	int m_width;
+	int m_depth;
+	int m_height_num;
+
 public:
 
-	VertexCube(DirectX::SimpleMath::Matrix world);
+	VertexCube(DirectX::SimpleMath::Matrix world,int Height_num);
 
 	void Update();
 

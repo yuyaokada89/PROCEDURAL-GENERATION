@@ -19,8 +19,8 @@ RandomMapMaker::RandomMapMaker()
 	seedX = 0;
 	seedZ = 0;
 
-	width = 50;
-	depth = 50;
+	width = 30;
+	depth = 30;
 
 	MaxHeight = 10;
 
@@ -57,23 +57,23 @@ void RandomMapMaker::Initialize()
 		//　ワールド行列を合成
 		world = scalemat * transmat;
 
-		m_VertexCube[j] = std::make_unique<VertexCube>(world);
+		
 
 		if (MakeY(j / width, j % depth) >= 2)
 		{
-
+			m_VertexCube[j] = std::make_unique<VertexCube>(world, 0);
 		}
 		else if (MakeY(j / width, j % depth) >= 0)
 		{
-
+			m_VertexCube[j] = std::make_unique<VertexCube>(world, 1);
 		}
 		else if (MakeY(j / width, j % depth) >= -3)
 		{
-
+			m_VertexCube[j] = std::make_unique<VertexCube>(world, 2);
 		}
-		else if (MakeY(j / width, j % depth) >= -5)
+		else if (MakeY(j / width, j % depth) >= -6)
 		{
-
+			m_VertexCube[j] = std::make_unique<VertexCube>(world, 3);
 		}
 	}
 }
