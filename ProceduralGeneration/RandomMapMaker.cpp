@@ -5,6 +5,7 @@
 
 #include "DXTKGroup.h"
 #include "RandomMapMaker.h"
+#include "MemoryLeakDetector.h"
 
 
 using namespace DirectX;
@@ -27,6 +28,8 @@ RandomMapMaker::RandomMapMaker()
 	relief = 15.0f;
 
 	m_cube.resize(width * depth);
+
+	SetUpMemoryLeakDetector();
 
 	Initialize();
 }

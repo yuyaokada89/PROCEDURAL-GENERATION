@@ -49,6 +49,7 @@
     <ClInclude Include="VertexCube.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryLeakDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugCamera.cpp">

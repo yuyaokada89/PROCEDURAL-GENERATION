@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "DXTKGroup.h"
+#include "MemoryLeakDetector.h"
 
 #include <d3d11.h>
 
@@ -25,6 +26,7 @@ Game::Game() :
     m_outputHeight(600),
     m_featureLevel(D3D_FEATURE_LEVEL_9_1)
 {
+	SetUpMemoryLeakDetector();
 }
 
 // Initialize the Direct3D resources required to run.
@@ -222,6 +224,11 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	m_map->Update();
+
+	if (kb.IsKeyDown(Keyboard::Keys::Escape))
+	{
+		ExitGame();
+	}
 }
 
 // Draws the scene.

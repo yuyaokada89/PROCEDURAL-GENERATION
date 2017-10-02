@@ -2,6 +2,7 @@
 
 #include "VertexCube.h"
 #include "DXTKGroup.h"
+#include "MemoryLeakDetector.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -119,6 +120,8 @@ VertexCube::VertexCube(Matrix world,int Height_num)
 {
 	m_world = world;
 	m_height_num = Height_num;
+
+	SetUpMemoryLeakDetector();
 
 	PolygonInit();
 }
