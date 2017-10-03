@@ -4,6 +4,8 @@
 
 #include "pch.h"
 #include "Game.h"
+#include "../ProceduralGeneration/Scene/FBXRender.h"
+#include "../ProceduralGeneration/Scene/VertexRender.h"
 #include "DXTKGroup.h"
 #include "MemoryLeakDetector.h"
 
@@ -52,11 +54,8 @@ void Game::Initialize(HWND window, int width, int height)
 
 	dxtk.Initializer(m_d3dDevice.Get(), m_d3dContext.Get());
 
-	//　デバッグカメラの生成
-	m_debugcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
-
-	//　カメラの生成
-	m_camera = std::make_unique<FollowCamera>(m_outputWidth, m_outputHeight);
+	m_Scene = new SceneManager();
+	m_Scene->Scene(FBXRender::GetInstance());
 
 	// ビュー行列の設定
 	m_view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
@@ -65,21 +64,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
 		float(m_outputWidth) / float(m_outputHeight), 0.1f, 1000.f);
 
-
-	
-
-	//　3Dオブジェクトクラスの静的メンバを初期化
-	Obj3d::InitializeStatic(
-		m_camera.get()
-		, dxtk.m_device
-		, dxtk.m_context
-	);
-
-	VertexCube::InitializeStatic(m_camera.get());
-
-	m_angle = 0;
-
-	m_map = std::make_unique<RandomMapMaker>();	
 
 }
 
@@ -103,132 +87,10 @@ void Game::Update(DX::StepTimer const& timer)
     // TODO: Add your game logic here.
     elapsedTime;
 
-	//　デバッグカメラの更新
-	m_debugcamera->Update();
-
-	//　カメラの更新
-	m_camera->Update();
-	m_view = m_camera->GetViewMatrix();
-	m_proj = m_camera->GetProjectionMatrix();
-
-
 	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
-	auto kb = dxtk.m_keyboard->GetState();
-	// キー入力の更新
-	dxtk.UpdateInputState();
 
-	//　カメラ上昇
-	if (kb.IsKeyDown(Keyboard::Keys::Up))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(0, 0.1f, 0);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
+	m_Scene->Update();
 
-	// カメラ下降
-	if (kb.IsKeyDown(Keyboard::Keys::Down))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(0, -0.1f, 0);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
-	
-	//　カメラ右移動
-	if (kb.IsKeyDown(Keyboard::Keys::Right))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(0.1f,0, 0);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
-
-	//　カメラ左移動
-	if (kb.IsKeyDown(Keyboard::Keys::Left))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(-0.1f, 0, 0);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
-
-	//　カメラ前進
-	if (kb.IsKeyDown(Keyboard::Keys::W))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(0, 0, -0.1f);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
-
-	//　カメラ後退
-	if (kb.IsKeyDown(Keyboard::Keys::S))
-	{
-		// 現在の座標・回転角を取得
-		Vector3 trans = m_camera->GetTranslation();
-		// 移動ベクトル(Z座標後退)
-		Vector3 moveV(0, 0, 0.1f);
-		Matrix rotm = Matrix::CreateRotationY(0);
-		// 移動ベクトルを回転する
-		moveV = Vector3::TransformNormal(moveV, rotm);
-		// 移動
-		trans += moveV;
-		m_camera->SetTargetPos(trans);
-	}
-
-	const float rotSpeed = 0.5f;
-
-	//　カメラ後退
-	if (kb.IsKeyDown(Keyboard::Keys::Q))
-	{
-		m_angle -= rotSpeed;
-		m_camera->SetTargetAngle(XMConvertToRadians(m_angle));
-	}
-
-	//　カメラ後退
-	if (kb.IsKeyDown(Keyboard::Keys::P))
-	{
-		m_angle += rotSpeed;
-		m_camera->SetTargetAngle(XMConvertToRadians(m_angle));
-	}
-
-	m_map->Update();
-
-	if (kb.IsKeyDown(Keyboard::Keys::Escape))
-	{
-		ExitGame();
-	}
 }
 
 // Draws the scene.
@@ -244,12 +106,7 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 
-	DXTK::DXTKGroup& dxtk = DXTK::DXTKGroup::singleton();
-
-	
-	m_map->Draw();
-
-	//dxtk.m_spriteBatch->Begin();
+	m_Scene->Render();
 
     Present();
 }

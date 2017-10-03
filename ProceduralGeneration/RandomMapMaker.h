@@ -33,6 +33,8 @@ private:
 	//　起伏の激しさ
 	float relief;
 
+	bool DrawChangeFlag;
+
 	// 箱モデル
 	std::vector<Obj3d>	m_cube;
 
@@ -58,4 +60,5 @@ public:
 	//　描画
 	void Draw();
 
+	void SetFlag(const bool& changeflag) { DrawChangeFlag = changeflag; }
 };

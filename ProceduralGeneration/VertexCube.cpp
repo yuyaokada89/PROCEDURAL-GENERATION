@@ -26,53 +26,19 @@ void VertexCube::InitializeStatic(Camera * pCamera)
 	m_pCamera = pCamera;
 }
 
-VertexCube::VertexCube(Matrix world,XMVECTOR color)
+VertexCube::VertexCube(Matrix world,Vector4 color)
 {
 	m_world = world;
 
 	m_color = color;
-
-	VertexColorCreate();
 
 	SetUpMemoryLeakDetector();
 
 	PolygonInit();
 }
 
-void VertexCube::VertexColorCreate()
+VertexCube::~VertexCube()
 {
-	vex[0] =
-	{
-		Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color 	//0
-	};
-	vex[1] =
-	{
-		Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color 	//1
-	};
-	vex[2] =
-	{
-		Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//2
-	};
-	vex[3] =
-	{
-		Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//3
-	};
-	vex[4] =
-	{
-		Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//4
-	};
-	vex[5] =
-	{
-		Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f) ,m_color 	//5
-	};
-	vex[6] =
-	{
-		Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//6
-	};
-	vex[7] =
-	{
-		Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f)  ,m_color 	//7
-	};
 }
 
 void VertexCube::PolygonInit()
@@ -166,12 +132,41 @@ void VertexCube::PolygonDraw()
 
 	dxtk.m_context->IASetInputLayout(inputLayout.Get());
 
+	VertexPositionNormalColor vex[] =
+	{
+		{ Vector3(-0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(-0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(+0.5f,+1.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(+0.5f,-0.0f,+0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(+0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(+0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(-0.5f,+1.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+		{ Vector3(-0.5f,-0.0f,-0.5f),Vector3(0.0f, 0.0f,+1.0f),m_color },
+	};
+
+
+	uint16_t indexes[] =
+	{
+		2,1,0,	//　表
+		3,1,2,	//　表
+		4,3,2,	//　右
+		5,3,4,	//　右
+		0,7,6,	//　左
+		1,7,0,	//　左
+		6,7,4,	//　裏
+		4,7,5,	//　裏
+		4,0,6,	//　上
+		2,0,4,	//　上
+		7,1,5,	//　下
+		5,1,3,	//　下
+	};
+
 	// プリミティブの描画
 	primitiveBatch->Begin();
 	// 三角形リストの描画
 	primitiveBatch->DrawIndexed(
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-		m_indexes, 6 * 6, vex, 4 * 6);
+		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		indexes, 6 * 6, vex, 4 * 6);
 	primitiveBatch->End();
 	
 }

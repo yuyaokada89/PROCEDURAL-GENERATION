@@ -20,8 +20,8 @@ RandomMapMaker::RandomMapMaker()
 	seedX = 0;
 	seedZ = 0;
 
-	width = 40;
-	depth = 40;
+	width = 30;
+	depth = 30;
 
 	MaxHeight = 10;
 
@@ -45,6 +45,9 @@ void RandomMapMaker::Initialize()
 	seedZ = rand() % 100;
 
 	m_VertexCube.resize(width * depth);
+	
+	DrawChangeFlag = true;
+
 	for (int j = 0; j < width * depth; j++)
 	{
 		Matrix world;
@@ -60,23 +63,23 @@ void RandomMapMaker::Initialize()
 		//　ワールド行列を合成
 		world = scalemat * transmat;
 
-		XMVECTOR color;
+		Vector4 color;
 
 		if (MakeY(j / width, j % depth) >= 2)
 		{
-			color = Colors::Green;		
+			color = Vector4(Colors::Green);		
 		}
 		else if (MakeY(j / width, j % depth) >= 0)
 		{
-			color = Colors::SaddleBrown;
+			color = Vector4(Colors::SaddleBrown);
 		}
 		else if (MakeY(j / width, j % depth) >= -3)
 		{
-			color = Colors::RoyalBlue;
+			color = Vector4(Colors::RoyalBlue);
 		}
 		else if (MakeY(j / width, j % depth) >= -6)
 		{
-			color = Colors::Gray;
+			color = Vector4(Colors::Gray);
 		}
 		m_VertexCube[j] = std::make_unique<VertexCube>(world, color);
 	}
@@ -90,11 +93,14 @@ void RandomMapMaker::Initialize()
 //―――――――――――――――――――――――
 void RandomMapMaker::Update()
 {
-	for (std::vector<std::unique_ptr<VertexCube>>::iterator it = m_VertexCube.begin();
-		it != m_VertexCube.end();
-		it++)
+	if (!DrawChangeFlag)
 	{
-		(*it)->Update();
+		for (std::vector<std::unique_ptr<VertexCube>>::iterator it = m_VertexCube.begin();
+			it != m_VertexCube.end();
+			it++)
+		{
+			(*it)->Update();
+		}
 	}
 
 	Calc();
@@ -106,9 +112,12 @@ void RandomMapMaker::Update()
 //
 void RandomMapMaker::Calc()
 {
-	for (int i = 0; i < width * depth; i++)
+	if (DrawChangeFlag)
 	{
-		m_cube[i].Update();
+		for (int i = 0; i < width * depth; i++)
+		{
+			m_cube[i].Update();
+		}
 	}
 }
 

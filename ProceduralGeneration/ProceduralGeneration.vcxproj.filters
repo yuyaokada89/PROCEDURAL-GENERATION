@@ -17,6 +17,9 @@
     <Filter Include="Framework Source">
       <UniqueIdentifier>{7a0fd02d-6e76-4c99-8164-985d47a6c3da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{27dd7d71-8871-4b84-989e-f14d370d5db8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugCamera.h">
@@ -50,6 +53,15 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="MemoryLeakDetector.h" />
+    <ClInclude Include="Scene\FBXRender.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\VertexRender.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugCamera.cpp">
@@ -79,6 +91,15 @@
     <ClCompile Include="DXTKGroup.cpp" />
     <ClCompile Include="VertexCube.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\FBXRender.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\VertexRender.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,8 @@
 #include "Obj3d.h"
 #include "RandomMapMaker.h"
 #include "VertexCube.h"
+#include "../ProceduralGeneration/Scene/SceneManager.h"
+
 
 
 
@@ -83,15 +85,8 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	DirectX::SimpleMath::Matrix m_proj;
 
-	//　デバッグカメラ
-	std::unique_ptr<DebugCamera> m_debugcamera;
 
-	//　カメラ
-	std::unique_ptr<FollowCamera> m_camera;
+	SceneManager* m_Scene;
 
-	// マップ
-	std::unique_ptr<RandomMapMaker> m_map;
-
-	float m_angle;
 
 };

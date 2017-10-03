@@ -30,33 +30,12 @@ private:
 	//インプットレイアウト
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
 
-	int m_height_num;
-
-	DirectX::VertexPositionNormalColor vex[8];
-
-	DirectX::XMVECTOR m_color;
-
-	uint16_t m_indexes[36] =
-	{
-		2,1,0,	//　表
-		3,1,2,	//　表
-		4,3,2,	//　右
-		5,3,4,	//　右
-		0,7,6,	//　左
-		1,7,0,	//　左
-		6,7,4,	//　裏
-		4,7,5,	//　裏
-		4,0,6,	//　上
-		2,0,4,	//　上
-		7,1,5,	//　下
-		5,1,3,	//　下
-	};
+	DirectX::SimpleMath::Vector4 m_color;
 
 public:
 
-	VertexCube(DirectX::SimpleMath::Matrix world,DirectX::XMVECTOR color);
-
-	void VertexColorCreate();
+	VertexCube(DirectX::SimpleMath::Matrix world,DirectX::SimpleMath::Vector4 color);
+	~VertexCube();
 
 	void Update();
 
