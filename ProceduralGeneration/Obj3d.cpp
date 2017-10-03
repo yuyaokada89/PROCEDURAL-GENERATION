@@ -35,9 +35,6 @@ Obj3d::Obj3d()
 
 Obj3d::~Obj3d()
 {
-	m_states.reset();
-	m_factory.reset();
-	m_model.reset();
 }
 
 
@@ -62,7 +59,6 @@ void Obj3d::LoadModel(const wchar_t *filename)
 
 	/*ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý*/
 	m_model = Model::CreateFromCMO(dxtk.m_device, filename, *m_factory);
-
 }
 
 void Obj3d::Update()
@@ -112,4 +108,11 @@ void Obj3d::Draw()
 				m_pCamera->GetViewMatrix(),
 				m_pCamera->GetProjectionMatrix());
 	}
+}
+
+void Obj3d::Finalize()
+{
+	m_states.reset();
+	m_factory.reset();
+	m_model.reset();
 }

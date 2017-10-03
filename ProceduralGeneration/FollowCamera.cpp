@@ -73,7 +73,7 @@ void FollowCamera::Update()
 	if (m_isFPS == false)
 	{//TPSカメラ
 		//　ターゲットの座標は、自機の座標に追従
-		refpos = m_targetPos + Vector3(18.0f, 12.0f, 50.0f);
+		refpos = m_targetPos + Vector3(30.0f, 30.0f, 80.0f);
 		//　ターゲット座標からカメラ座標への差分
 		Vector3 cameraV(0.0f, 2.0f, CAMERA_DISTANCE);
 

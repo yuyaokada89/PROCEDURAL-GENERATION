@@ -22,8 +22,8 @@ RandomMapMaker::RandomMapMaker(bool changeflag)
 	seedX = 0;
 	seedZ = 0;
 
-	width = 40;
-	depth = 40;
+	width = 60;
+	depth = 60;
 
 	MaxHeight = 10;
 
@@ -58,14 +58,12 @@ void RandomMapMaker::Initialize()
 
 		Vector4 color;
 
-		float y;
-
-		y = MakeY(i / width, i % depth);
+		Cube_y = MakeY(i / width, i % depth);
 
 		//　スケーリング行列
 		Matrix scalemat = Matrix::CreateScale(Vector3(1, 1, 1));
 
-		pos = Vector3(i / width, y, i % depth);
+		pos = Vector3(i / width, Cube_y, i % depth);
 
 		//　平行移動行列
 		Matrix transmat = Matrix::CreateTranslation(pos);
@@ -77,19 +75,20 @@ void RandomMapMaker::Initialize()
 		if (DrawChangeFlag)
 		{
 			m_cube[i] = std::make_unique<Obj3d>();
-			if (y >= 2)
+
+			if (Cube_y >= 2)
 			{
 				m_cube[i]->LoadModel(L"cmo/Grassy.cmo");
 			}
-			else if (y >= 0)
+			else if (Cube_y >= 0)
 			{
 				m_cube[i]->LoadModel(L"cmo/Sand.cmo");
 			}
-			else if (y >= -3)
+			else if (Cube_y >= -3)
 			{
 				m_cube[i]->LoadModel(L"cmo/Water.cmo");
 			}
-			else if (y >= -6)
+			else if (Cube_y >= -6)
 			{
 				m_cube[i]->LoadModel(L"cmo/Stone.cmo");
 			}
@@ -98,25 +97,27 @@ void RandomMapMaker::Initialize()
 		}
 		else
 		{
-			if (y >= 2)
+			if (Cube_y >= 2)
 			{
 				color = Vector4(Colors::Green);
 			}
-			else if (y >= 0)
+			else if (Cube_y >= 0)
 			{
 				color = Vector4(Colors::SaddleBrown);
 			}
-			else if (y >= -3)
+			else if (Cube_y >= -3)
 			{
 				color = Vector4(Colors::RoyalBlue);
 			}
-			else if (y >= -6)
+			else if (Cube_y >= -6)
 			{
 				color = Vector4(Colors::Gray);
 			}
 			m_VertexCube[i] = std::make_unique<VertexCube>(world, color);
 		}
 	}
+
+
 }
 
 
@@ -208,6 +209,7 @@ void RandomMapMaker::Finalize()
 	{
 		(*it).reset();
 	}
+	m_VertexCube.clear();
 
 	for (std::vector<std::unique_ptr<Obj3d>>::iterator it = m_cube.begin();
 		it != m_cube.end();
@@ -215,6 +217,7 @@ void RandomMapMaker::Finalize()
 	{
 		(*it).reset();
 	}
+	m_cube.clear();
 }
 
 

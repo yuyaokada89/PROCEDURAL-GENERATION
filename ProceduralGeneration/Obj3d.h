@@ -38,6 +38,8 @@ class Obj3d
 
 		~Obj3d();
 
+		void Finalize();
+
 		//@ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
 		void LoadModel(const wchar_t *filename);
 

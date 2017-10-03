@@ -33,6 +33,8 @@ private:
 	//@‹N•š‚ÌŒƒ‚µ‚³
 	float relief;
 
+	float Cube_y;
+
 	bool DrawChangeFlag;
 
 	// ” ƒ‚ƒfƒ‹

@@ -59,6 +59,8 @@ private:
 
     void OnDeviceLost();
 
+	void Finalize();
+
     // Device resources.
     HWND                                            m_window;
     int                                             m_outputWidth;

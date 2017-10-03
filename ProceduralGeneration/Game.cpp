@@ -28,8 +28,9 @@ Game::Game() :
     m_outputHeight(600),
     m_featureLevel(D3D_FEATURE_LEVEL_9_1)
 {
-	SetUpMemoryLeakDetector();
+	//SetUpMemoryLeakDetector();
 }
+
 
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
@@ -405,4 +406,11 @@ void Game::OnDeviceLost()
     CreateDevice();
 
     CreateResources();
+
+	Finalize();
+}
+
+void Game::Finalize()
+{
+	delete m_Scene;
 }
