@@ -44,7 +44,7 @@ private:
 
 public:
 	//@‰Šú‰»
-	RandomMapMaker();
+	RandomMapMaker(bool changeflag);
 
 	float MakeY(int x, int z);
 
@@ -60,5 +60,4 @@ public:
 	//@•`‰æ
 	void Draw();
 
-	void SetFlag(const bool& changeflag) { DrawChangeFlag = changeflag; }
 };

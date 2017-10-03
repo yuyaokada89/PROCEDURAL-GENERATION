@@ -13,9 +13,11 @@ using namespace DirectX::SimpleMath;
 
 
 
-RandomMapMaker::RandomMapMaker()
+RandomMapMaker::RandomMapMaker(bool changeflag)
 {
 	srand((unsigned int)time(NULL));
+
+	DrawChangeFlag = changeflag;
 
 	seedX = 0;
 	seedZ = 0;
@@ -46,16 +48,14 @@ void RandomMapMaker::Initialize()
 
 	m_VertexCube.resize(width * depth);
 	
-	DrawChangeFlag = true;
-
-	for (int j = 0; j < width * depth; j++)
+	for (int i = 0; i < width * depth; i++)
 	{
 		Matrix world;
 
 		//　スケーリング行列
 		Matrix scalemat = Matrix::CreateScale(Vector3(1, 1, 1));
 
-		Vector3 pos = Vector3(j / width, MakeY(j / width,j % depth), j % depth);
+		Vector3 pos = Vector3(i / width, MakeY(i / width, i % depth), i % depth);
 
 		//　平行移動行列
 		Matrix transmat = Matrix::CreateTranslation(pos);
@@ -65,23 +65,47 @@ void RandomMapMaker::Initialize()
 
 		Vector4 color;
 
-		if (MakeY(j / width, j % depth) >= 2)
+
+		if (DrawChangeFlag)
 		{
-			color = Vector4(Colors::Green);		
+			if (MakeY(i / width, i % depth) >= 2)
+			{
+				m_cube[i].LoadModel(L"cmo/Grassy.cmo");
+			}
+			else if (MakeY(i / width, i % depth) >= 0)
+			{
+				m_cube[i].LoadModel(L"cmo/Sand.cmo");
+			}
+			else if (MakeY(i / width, i % depth) >= -3)
+			{
+				m_cube[i].LoadModel(L"cmo/Water.cmo");
+			}
+			else if (MakeY(i / width, i % depth) >= -6)
+			{
+				m_cube[i].LoadModel(L"cmo/Stone.cmo");
+			}
+			m_cube[i].SetTranslation(pos);
 		}
-		else if (MakeY(j / width, j % depth) >= 0)
+		else
 		{
-			color = Vector4(Colors::SaddleBrown);
+			if (MakeY(i / width, i % depth) >= 2)
+			{
+				color = Vector4(Colors::Green);
+			}
+			else if (MakeY(i / width, i % depth) >= 0)
+			{
+				color = Vector4(Colors::SaddleBrown);
+			}
+			else if (MakeY(i / width, i % depth) >= -3)
+			{
+				color = Vector4(Colors::RoyalBlue);
+			}
+			else if (MakeY(i / width, i % depth) >= -6)
+			{
+				color = Vector4(Colors::Gray);
+			}
+			m_VertexCube[i] = std::make_unique<VertexCube>(world, color);
 		}
-		else if (MakeY(j / width, j % depth) >= -3)
-		{
-			color = Vector4(Colors::RoyalBlue);
-		}
-		else if (MakeY(j / width, j % depth) >= -6)
-		{
-			color = Vector4(Colors::Gray);
-		}
-		m_VertexCube[j] = std::make_unique<VertexCube>(world, color);
 	}
 }
 
@@ -143,12 +167,23 @@ float RandomMapMaker::MakeY(int x,int z)
 //
 void RandomMapMaker::Draw()
 {
-	for (std::vector<std::unique_ptr<VertexCube>>::iterator it = m_VertexCube.begin();
-		it != m_VertexCube.end();
-		it++)
+	if (!DrawChangeFlag)
 	{
-		(*it)->Render();
+		for (std::vector<std::unique_ptr<VertexCube>>::iterator it = m_VertexCube.begin();
+			it != m_VertexCube.end();
+			it++)
+		{
+			(*it)->Render();
+		}
 	}
+	else
+	{
+		for (int i = 0; i < width * depth; i++)
+		{
+			m_cube[i].Draw();
+		}
+	}
+
 }
 
 

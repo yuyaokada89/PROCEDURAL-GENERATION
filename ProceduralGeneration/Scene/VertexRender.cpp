@@ -53,9 +53,8 @@ void VertexRender::Initialize()
 
 	m_angle = 0;
 
-	m_map = std::make_unique<RandomMapMaker>();
+	m_map = std::make_unique<RandomMapMaker>(false);
 
-	m_map->SetFlag(false);
 
 }
 
@@ -192,8 +191,6 @@ void VertexRender::UpdateScene(SceneManager* scene)
 		tScene.Initialize();
 
 		scene->Scene(FBXRender::GetInstance());
-
-		Dispose();
 	}
 
 }

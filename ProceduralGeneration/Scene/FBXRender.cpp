@@ -51,9 +51,8 @@ void FBXRender::Initialize()
 
 	m_angle = 0;
 
-	m_map = std::make_unique<RandomMapMaker>();
+	m_map = std::make_unique<RandomMapMaker>(true);
 
-	m_map->SetFlag(true);
 }
 
 void FBXRender::UpdateScene(SceneManager * scene)
@@ -181,6 +180,7 @@ void FBXRender::UpdateScene(SceneManager * scene)
 	{
 		/*ƒV[ƒ“‘JˆÚ*/
 		scene->Scene(VertexRender::GetInstance());
+
 	}
 }
 
