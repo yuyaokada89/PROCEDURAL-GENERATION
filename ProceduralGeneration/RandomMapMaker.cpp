@@ -31,7 +31,7 @@ RandomMapMaker::RandomMapMaker(bool changeflag)
 
 	m_cube.resize(width * depth);
 
-	SetUpMemoryLeakDetector();
+	//SetUpMemoryLeakDetector();
 
 	Initialize();
 }

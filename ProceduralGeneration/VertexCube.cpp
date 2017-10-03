@@ -32,7 +32,7 @@ VertexCube::VertexCube(Matrix world,Vector4 color)
 
 	m_color = color;
 
-	SetUpMemoryLeakDetector();
+	//SetUpMemoryLeakDetector();
 
 	PolygonInit();
 }

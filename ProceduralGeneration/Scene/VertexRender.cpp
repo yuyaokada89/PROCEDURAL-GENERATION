@@ -194,7 +194,7 @@ void VertexRender::RenderScene()
 	m_map->Draw();
 
 	dxtk.m_spriteBatch->Begin();
-	dxtk.m_spriteFont->DrawString(dxtk.m_spriteBatch.get(), L"VertexRender", XMFLOAT2(100, 100));
+	dxtk.m_spriteFont->DrawString(dxtk.m_spriteBatch.get(), L"VertexRender", XMFLOAT2(0, 0));
 	dxtk.m_spriteBatch->End();
 }
 
