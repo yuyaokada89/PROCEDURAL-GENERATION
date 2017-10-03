@@ -39,6 +39,9 @@ VertexCube::VertexCube(Matrix world,Vector4 color)
 
 VertexCube::~VertexCube()
 {
+	inputLayout.Reset();
+	basicEffect.reset();
+	primitiveBatch.reset();
 }
 
 void VertexCube::PolygonInit()

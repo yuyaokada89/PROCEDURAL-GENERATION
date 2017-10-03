@@ -29,6 +29,12 @@ FBXRender::FBXRender()
 	this->Initialize();
 }
 
+FBXRender::~FBXRender()
+{
+	m_map.reset();
+	m_camera.reset();
+}
+
 void FBXRender::Initialize()
 {
 	srand(static_cast<unsigned int>(time(nullptr)));

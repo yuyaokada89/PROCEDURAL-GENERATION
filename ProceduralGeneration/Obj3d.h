@@ -36,6 +36,8 @@ class Obj3d
 		//　コンストラクタ
 		Obj3d();
 
+		~Obj3d();
+
 		//　モデルの読み込み
 		void LoadModel(const wchar_t *filename);
 
@@ -60,7 +62,7 @@ class Obj3d
 		//　ローカルワールド
 		void SetWorld(const DirectX::SimpleMath::Matrix &world) { m_world = world; }
 		//　親行列用
-		void SetObjectParent(Obj3d *pObjParent) { m_pObjParent = pObjParent; }
+		//void SetObjectParent(Obj3d *pObjParent) { m_pObjParent = pObjParent; }
 		//―――――――――――――――――――――――――――――――――
 		//　getter
 		//―――――――――――――――――――――――――――――――――
@@ -74,7 +76,7 @@ class Obj3d
 		//　ワールド行列を取得
 		const DirectX::SimpleMath::Matrix& GetWorld() { return m_world; }
 		//　親行列を取得
-		Obj3d* GetObjParent() { return m_pObjParent; }
+		//Obj3d* GetObjParent() { return m_pObjParent; }
 		
 	private:
 		//　モデルのユニークポインタ
@@ -89,8 +91,6 @@ class Obj3d
 		DirectX::SimpleMath::Vector3	m_translation;
 		//　ワールド行列
 		DirectX::SimpleMath::Matrix		m_world;
-		//　親となる３Ｄオブジェクトのクラスのポインタ
-		Obj3d* m_pObjParent;
 		//　回転をクォータニオンで持っているフラグ
 		bool m_UseQuternion;
 };

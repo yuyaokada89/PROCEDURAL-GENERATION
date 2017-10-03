@@ -29,6 +29,8 @@ VertexRender::VertexRender()
 
 VertexRender::~VertexRender()
 {
+	m_map.reset();
+	m_camera.reset();
 }
 
 void VertexRender::Initialize()

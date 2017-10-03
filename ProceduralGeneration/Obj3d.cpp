@@ -29,11 +29,18 @@ Obj3d::Obj3d()
 	//　変数の初期化
 	m_scale = Vector3(1, 1, 1);
 
-	m_pObjParent = nullptr;
-
 	//　デフォルトではクォータニオンを使わない
 	m_UseQuternion = false;
 }
+
+Obj3d::~Obj3d()
+{
+	m_states.reset();
+	m_factory.reset();
+	m_model.reset();
+}
+
+
 
 void Obj3d::InitializeStatic(Camera * pCamera, 
 	Microsoft::WRL::ComPtr<ID3D11Device> d3dDevice, 
@@ -89,11 +96,6 @@ void Obj3d::Update()
 	//　ワールド行列を合成
 	m_world = scalemat * rotmat * transmat;
 	
-	//　親が存在する場合
-	if (m_pObjParent)
-	{
-		m_world *= m_pObjParent->GetWorld();
-	}
 }
 
 void Obj3d::Draw()

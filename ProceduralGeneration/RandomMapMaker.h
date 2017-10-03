@@ -36,15 +36,18 @@ private:
 	bool DrawChangeFlag;
 
 	// ” ƒ‚ƒfƒ‹
-	std::vector<Obj3d>	m_cube;
+	std::vector<std::unique_ptr<Obj3d>>	m_cube;
 
 	siv::PerlinNoise m_noise;
 
 	std::vector<std::unique_ptr<VertexCube>> m_VertexCube;
 
+	DirectX::SimpleMath::Vector3 pos;
+
 public:
 	//@‰Šú‰»
 	RandomMapMaker(bool changeflag);
+	~RandomMapMaker();
 
 	float MakeY(int x, int z);
 
@@ -59,5 +62,7 @@ public:
 
 	//@•`‰æ
 	void Draw();
+
+	void Finalize();
 
 };

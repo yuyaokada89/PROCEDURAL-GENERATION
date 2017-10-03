@@ -17,6 +17,8 @@ public:
 	/*コンストラクタ*/
 	FBXRender();
 
+	~FBXRender();
+
 	/*初期化*/
 	void Initialize();
 	/*データの更新*/
