@@ -26,6 +26,9 @@ public:
 
 	static void Dispose();
 
+	// Exit helper
+	void ExitGame();
+
 private:
 	static SceneBase* m_base;
 	//std::unique_ptr<FollowCamera> m_Camera;

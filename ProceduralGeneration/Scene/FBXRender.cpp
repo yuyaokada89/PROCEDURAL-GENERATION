@@ -47,8 +47,6 @@ void FBXRender::Initialize()
 		, dxtk.m_context
 	);
 
-	VertexCube::InitializeStatic(m_camera.get());
-
 	m_angle = 0;
 
 	m_map = std::make_unique<RandomMapMaker>(true);
@@ -175,11 +173,17 @@ void FBXRender::UpdateScene(SceneManager * scene)
 
 	m_map->Update();
 
+	if (kb.IsKeyDown(Keyboard::Keys::Escape))
+	{
+		ExitGame();
+	}
 
 	if (dxtk.m_keyTracker->IsKeyPressed(Keyboard::Keys::Enter))
 	{
 		/*ƒV[ƒ“‘JˆÚ*/
 		scene->Scene(VertexRender::GetInstance());
+
+		Dispose();
 
 	}
 }
@@ -203,6 +207,12 @@ void FBXRender::Dispose()
 	{
 		delete m_base;
 	}
+}
+
+// Exit helper
+void FBXRender::ExitGame()
+{
+	PostQuitMessage(0);
 }
 
 

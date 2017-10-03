@@ -22,8 +22,8 @@ RandomMapMaker::RandomMapMaker(bool changeflag)
 	seedX = 0;
 	seedZ = 0;
 
-	width = 30;
-	depth = 30;
+	width = 40;
+	depth = 40;
 
 	MaxHeight = 10;
 

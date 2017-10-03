@@ -42,13 +42,6 @@ void VertexRender::Initialize()
 	//　カメラの生成
 	m_camera = std::make_unique<FollowCamera>(m_outputWidth, m_outputHeight);
 
-	//　3Dオブジェクトクラスの静的メンバを初期化
-	Obj3d::InitializeStatic(
-		m_camera.get()
-		, dxtk.m_device
-		, dxtk.m_context
-	);
-
 	VertexCube::InitializeStatic(m_camera.get());
 
 	m_angle = 0;
@@ -179,18 +172,17 @@ void VertexRender::UpdateScene(SceneManager* scene)
 
 	m_map->Update();
 
-	/*if (kb.IsKeyDown(Keyboard::Keys::Escape))
+	if (kb.IsKeyDown(Keyboard::Keys::Escape))
 	{
 		ExitGame();
-	}*/
+	}
 
 
 	if (dxtk.m_keyTracker->IsKeyPressed(Keyboard::Keys::F))
 	{
-		VertexRender tScene;
-		tScene.Initialize();
-
 		scene->Scene(FBXRender::GetInstance());
+
+		Dispose();
 	}
 
 }
@@ -212,4 +204,10 @@ void VertexRender::Dispose()
 	{
 		delete m_base;
 	}
+}
+
+// Exit helper
+void VertexRender::ExitGame()
+{
+	PostQuitMessage(0);
 }

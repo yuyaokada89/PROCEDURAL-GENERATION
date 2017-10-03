@@ -73,9 +73,9 @@ void FollowCamera::Update()
 	if (m_isFPS == false)
 	{//TPSカメラ
 		//　ターゲットの座標は、自機の座標に追従
-		refpos = m_targetPos + Vector3(18.0f, 25.0f, 40.0f);
+		refpos = m_targetPos + Vector3(18.0f, 12.0f, 50.0f);
 		//　ターゲット座標からカメラ座標への差分
-		Vector3 cameraV(0.0f, 5.0f, CAMERA_DISTANCE);
+		Vector3 cameraV(0.0f, 2.0f, CAMERA_DISTANCE);
 
 
 		//　カメラの視線方向の逆方向に回転

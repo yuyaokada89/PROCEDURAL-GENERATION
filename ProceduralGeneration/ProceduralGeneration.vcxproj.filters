@@ -64,9 +64,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DebugCamera.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Obj3d.cpp">
       <Filter>Source</Filter>
     </ClCompile>
